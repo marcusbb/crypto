@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	 <parent>
+        <groupId>org.marcusbb.crypto</groupId>
+        <artifactId>crypto</artifactId>
+		<version>2.0.2</version>
+    </parent>
+	
+	<artifactId>crypto-vault</artifactId>
+
+    <properties>
+        <guava.version>18.0</guava.version>
+        <commons.config.version>1.10</commons.config.version>
+        <cofoja.version>1.1-r150</cofoja.version>
+        <commons.version>0.0.1-SNAPSHOT</commons.version>
+        <jackson.version>2.3.3</jackson.version>
+        <httpclient.version>4.3.5</httpclient.version>
+	</properties>
+	<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<executions>
+				<execution>
+					<goals>
+						<goal>test-jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
+	<dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- <dependency>
+            <groupId>com.google.java.contract</groupId>
+            <artifactId>cofoja</artifactId>
+            <version>${cofoja.version}</version>
+        </dependency> -->
+        <dependency>
+            <groupId>org.marcusbb.crypto</groupId>
+            <artifactId>crypto-commons</artifactId>
+            <version>${project.version}</version>
+            
+        </dependency>
+        <!-- logging factory -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.marcusbb.crypto</groupId>
+			<artifactId>crypto-api</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>${commons.config.version}</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>${httpclient.version}</version>
+		</dependency>
+		<dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.3.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        <!-- Currently we applications will provide version
+            It seems reasonable that we differ to a standard
+            for base64 encoding
+         -->
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.50</version>
+            <scope>test</scope>
+        </dependency>
+		
+		 <dependency>
+		        <groupId>io.dropwizard.metrics</groupId>
+		        <artifactId>metrics-core</artifactId>
+		        <version>3.1.2</version>
+		        <scope>test</scope>
+		    </dependency>
+	</dependencies>
+</project>
