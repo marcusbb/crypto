@@ -16,7 +16,6 @@ import org.marcusbb.crypto.key.VersionedKeySpec;
 import org.marcusbb.crypto.key.KeySigningUtils;
 
 
-// TODO This is no longer aware of versioning and versioned can be dropped from the name
 public class JCEVersionedCipher implements VersionedCipher,VersionedStreamCipher {
 
 	private int STREAM_BLOCK_SIZE = 1024;
@@ -26,11 +25,10 @@ public class JCEVersionedCipher implements VersionedCipher,VersionedStreamCipher
 	public JCEVersionedCipher(int streamBlockSize) {
 		this.STREAM_BLOCK_SIZE = streamBlockSize;
 	}
-	// Should this class return a cipher via getInstance()? It can take in CipherSpec which is a key and vector
 
 	public byte[] encrypt(VersionedKey version, byte[] payload) {
 
-		//potentially fragile cast
+		
 		VersionedKeySpec materialized = (VersionedKeySpec)version;
 		final KeyedVectoredSymmetricCipher cipher =
 				KeyedVectoredSymmetricCipher
@@ -39,8 +37,7 @@ public class JCEVersionedCipher implements VersionedCipher,VersionedStreamCipher
 		byte[] encryptedMaterial = cipher.encrypt(payload);
 
 		// Sign cipher text with version
-		return KeySigningUtils.sighWithKeyVersion
-				(encryptedMaterial, version.getVersion());
+		return KeySigningUtils.sighWithKeyVersion(encryptedMaterial, version.getVersion());
 	}
 
 	/**
@@ -48,13 +45,11 @@ public class JCEVersionedCipher implements VersionedCipher,VersionedStreamCipher
 	 */
 	public byte[] decrypt(VersionedKey version, byte[] payload) {
 
-		// STRIP THE VERSION HEADER FROM PAYLOAD
+		
 		byte[] dataload = KeySigningUtils.stripKeyVersion(payload);
 		//potentially fragile cast
 		VersionedKeySpec materialized = (VersionedKeySpec)version;
-		final KeyedVectoredSymmetricCipher cipher =
-				KeyedVectoredSymmetricCipher
-						.getInstance(materialized.getIvParameterSpec().getIV(), materialized.getKey());
+		final KeyedVectoredSymmetricCipher cipher = KeyedVectoredSymmetricCipher.getInstance(materialized.getIvParameterSpec().getIV(), materialized.getKey());
 		
 		return cipher.decrypt(dataload);
 		
@@ -65,7 +60,7 @@ public class JCEVersionedCipher implements VersionedCipher,VersionedStreamCipher
 		
 		VersionedKeySpec materialized = (VersionedKeySpec)version;
 		
-		final KeyedVectoredSymmetricCipher cipher =
+		final KeyedVectoredSymmetricCipher cipher = 
 				KeyedVectoredSymmetricCipher
 						.getInstance(materialized.getIvParameterSpec().getIV(), materialized.getKey());
 		
