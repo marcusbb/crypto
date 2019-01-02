@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
@@ -74,13 +75,14 @@ public class VersionedCipherTest extends VaultTestBase {
 		VaultVersionedKeyBuilder keyBuilder = new VaultVersionedKeyBuilder(store);
 		assertEquals(1,keyBuilder.getVersion());
 		
-		store.createOrUpdateKeyPair("RSA", "latestKeyTest");
-		byte []encrypted = vCipher.encrypt(keyBuilder.buildPublicKey("latestKeyTest"),"helloworld".getBytes());
-		store.createOrUpdateKeyPair("RSA", "latestKeyTest");
-		store.createOrUpdateKeyPair("RSA", "latestKeyTest");
+		String keyName = "latestKey" + new SecureRandom().nextLong();
+		store.createOrUpdateKeyPair("RSA", keyName);
+		byte []encrypted = vCipher.encrypt(keyBuilder.buildPublicKey(keyName),"helloworld".getBytes());
+		store.createOrUpdateKeyPair("RSA", keyName);
+		store.createOrUpdateKeyPair("RSA", keyName);
 		
-		VersionedKeySpec vKey = (VersionedKeySpec)keyBuilder.buildPublicKey("latestKeyTest");
-		VersionedKeySpec vPrivKey = (VersionedKeySpec)keyBuilder.buildPrivateKey("latestKeyTest",encrypted);
+		VersionedKeySpec vKey = (VersionedKeySpec)keyBuilder.buildPublicKey(keyName);
+		VersionedKeySpec vPrivKey = (VersionedKeySpec)keyBuilder.buildPrivateKey(keyName,encrypted);
 		assertEquals(1,vPrivKey.getVersion());
 		assertEquals(3,vKey.getVersion());
 		
