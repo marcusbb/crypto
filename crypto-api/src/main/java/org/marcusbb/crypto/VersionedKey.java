@@ -17,20 +17,32 @@ import javax.crypto.spec.IvParameterSpec;
  *
  * {@link IvParameterSpec} is not technically part of the contract
  * of the key lookup, its the cipher's initialization vector,
- * but is a requirement for performing encryption/decryption
+ * but is a requirement for performing encryption/decryption and hence 
+ * a requirement of the VersionedKey
  *
  */
 public interface VersionedKey {
 
 	String keyHash();
 
+	/**
+	 * Constant header length
+	 * @return
+	 */
 	int headerLength();
 
+	/**
+	 * Header portion of the encrypted bytes
+	 * @return
+	 */
 	byte[] header();
 
-	//Not sure that this is part of the key signature?
 	IvParameterSpec iv();
 
+	/**
+	 * An alias to the keystore for it's name.
+	 * @return
+	 */
 	String versionedKeyName();
 
 	int getVersion();
