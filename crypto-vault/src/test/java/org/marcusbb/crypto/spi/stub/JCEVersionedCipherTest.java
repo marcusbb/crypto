@@ -2,15 +2,16 @@ package org.marcusbb.crypto.spi.stub;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.marcusbb.crypto.VersionedKey;
 import org.marcusbb.crypto.commons.StringUtils;
-import org.marcusbb.crypto.key.VersionedKeySpec;
 import org.marcusbb.crypto.spi.stub.FileBasedKeyStoreManager;
 import org.marcusbb.crypto.spi.stub.FileBasedVersionedKeyBuilder;
 import org.marcusbb.crypto.spi.stub.JCEVersionedCipher;
-import org.marcusbb.crypto.key.KeySigningUtils;
 
+
+@Ignore
 public class JCEVersionedCipherTest  {
 
 	private final FileBasedVersionedKeyBuilder fileBasedVersionedKeyBuilder = new FileBasedVersionedKeyBuilder(new FileBasedKeyStoreManager());
