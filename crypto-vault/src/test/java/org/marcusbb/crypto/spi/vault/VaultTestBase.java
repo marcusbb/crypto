@@ -45,7 +45,9 @@ public class VaultTestBase {
 	}
 	@BeforeClass
 	public static void beforeClass() throws Exception {
-		startVault();
+		if (new File(VAULT_INSTALL_PATH).exists())
+			startVault();
+		
 	}
 	@AfterClass
 	public static void afterClass() {
