@@ -1,2 +1,9 @@
-.project
 .classpath
+.project
+.settings
+/target/
+.idea/
+*~
+*.sw?
+*.iml
+**/target/
