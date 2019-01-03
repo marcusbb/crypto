@@ -24,7 +24,7 @@ mvn install -DskipTests=false
 
 docker rm -f dev-vault-for-crypto
 ```
-For non docker tests you will need to install a version of vault on /opt/hashicorp/vault.exe for you particular version of platform you are running.
+For non docker tests you will need to install a version of vault on /opt/hashicorp/vault.exe for you particular version of platform you are running.  
 
 
 
